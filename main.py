@@ -4,7 +4,10 @@ from discord import Intents, Client, Message
 from responses import get_response
 from reactions import get_reaction
 import sys
-
+import git 
+dir_path = os.path.dirname(os.path.realpath(__file__))
+g = git.cmd.Git(dir_path)
+g.pull()
 # STEP 0: LOAD OUR TOKEN FROM SOMEWHERE SAFE
 TOKEN =  str(sys.argv[1])
 print (TOKEN)

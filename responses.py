@@ -2,7 +2,7 @@ from random import choice, randint, sample
 import re
 from import_emijos import *
 from scrape import *
-
+from translate import *
 
 def find_ips(message):
     pattern = re.compile(
@@ -35,14 +35,17 @@ def get_response(user_input: str,user_name) -> str:
         lowered: str = user_input.lower()
         if lowered == 'antidisestablishmentarianism':
             return 'muie'
-        elif 'weed' in lowered:
+        if 'weed' in lowered:
             weedchane = randint(1,1000)
             if weedchane > 977:
                 return 'weed'
-        elif lowered == 'mansplain':
+        if 'mansplain' in lowered:
             return scrape_random_wiki_article()
-        elif find_ips(lowered):
+        if find_ips(lowered):
               return '[Imgur](https://imgur.com/kyo6sPn)'
+        if lowered.startswith('translate'):
+            lowered = lowered.replace("translate",'')
+            return translate_to_greek(lowered)
         else:
             ipchance = randint(1,1000)
             if ipchance > 995:
