@@ -3,6 +3,15 @@ import re
 from import_emijos import *
 from scrape import *
 from translate import *
+from bible import *
+import nltk
+from nltk.corpus import words
+
+def generate_string():
+    #nltk.download('words')
+    english_words = words.words()
+    selected_words = random.sample(english_words, randint(1, 50))
+    return ' '.join(selected_words)
 
 def find_ips(message):
     pattern = re.compile(
@@ -42,10 +51,14 @@ def get_response(user_input: str,user_name) -> str:
         if 'mansplain' in lowered:
             return scrape_random_wiki_article()
         if find_ips(lowered):
-              return '[Imgur](https://imgur.com/kyo6sPn)'
+            return '[Imgur](https://imgur.com/kyo6sPn)'
         if lowered.startswith('translate'):
             lowered = lowered.replace("translate",'')
             return translate_to_greek(lowered)
+        if 'bless me' in lowered:
+            return get_random_bible_verse()
+        if 'talk to god' in lowered:
+            return generate_string()
         else:
             ipchance = randint(1,1000)
             if ipchance > 995:
