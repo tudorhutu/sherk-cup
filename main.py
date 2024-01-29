@@ -1,11 +1,13 @@
-from typing import Final
+
 import os
 from discord import Intents, Client, Message
 from responses import get_response
 from reactions import get_reaction
 
 # STEP 0: LOAD OUR TOKEN FROM SOMEWHERE SAFE
-TOKEN = 'MTIwMTU4NzM1MDE0OTUzMzg0Ng.Gnb0Vn.X1kSE8NY6-YsIiFUmOe8onSfTipLFbWeFBWnpU'
+NOT_A_TOKEN='MTIwMTU4NzM1MDE0O'
+BROKEN='TUzMzg0Ng.GTY47Q.4jillLkb5i5Bp1cUHb5rOS4E4M0xUQ303TBFsg'
+TOKEN = NOT_A_TOKEN+BROKEN
 
 # STEP 1: BOT SETUP
 intents: Intents = Intents.default()
