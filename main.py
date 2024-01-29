@@ -3,12 +3,11 @@ import os
 from discord import Intents, Client, Message
 from responses import get_response
 from reactions import get_reaction
+import sys
 
 # STEP 0: LOAD OUR TOKEN FROM SOMEWHERE SAFE
-NOT_A_TOKEN='MTIwMTU4NzM1MDE0O'
-BROKEN='TUzMzg0Ng.GTY47Q.4jillLkb5i5Bp1cUHb5rOS4E4M0xUQ303TBFsg'
-TOKEN = NOT_A_TOKEN+BROKEN
-
+TOKEN =  str(sys.argv[1])
+print (TOKEN)
 # STEP 1: BOT SETUP
 intents: Intents = Intents.default()
 intents.message_content = True  # NOQA
