@@ -53,7 +53,7 @@ def get_response(user_input: str,user_name) -> str:
         if find_ips(lowered):
             return '[Imgur](https://imgur.com/kyo6sPn)'
         if lowered.startswith('translate'):
-            lowered = lowered.replace("translate",'')
+            lowered = lowered.replace("translate",'', 1)
             return translate_to_greek(lowered)
         if 'bless me' in lowered:
             return get_random_bible_verse()
