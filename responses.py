@@ -64,6 +64,8 @@ def get_response(user_input: str,user_name) -> str:
              return '7'
         if 'sapte' in lowered:
              return 'sapte'
+        if 'pacanele' in lowered:
+             return ''.join(random.sample(list(emojilist), 3))
         else:
             ipchance = randint(1,1000)
             if ipchance > 995:
