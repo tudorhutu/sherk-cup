@@ -8,6 +8,8 @@ def get_reaction(user_input: str,user_name) -> str:
     if 'react to this message with literally all emojis' == lowered:
         random_emojis = random.sample(list(emojilist), 20)
         return random_emojis
+    if user_name =='stfish':
+        return '🐟'
     else:
         emmojichance = randint(1, 100)
         if emmojichance > 85:

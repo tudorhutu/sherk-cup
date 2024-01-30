@@ -5,12 +5,13 @@ from scrape import *
 from translate import *
 from bible import *
 import nltk
-from nltk.corpus import words
+from nltk.corpus import words, brown
+from nltk.probability import FreqDist
 
 def generate_string():
-    #nltk.download('words')
-    english_words = words.words()
-    selected_words = random.sample(english_words, randint(1, 50))
+    # nltk.download('brown')
+    english_words = brown.words()
+    selected_words = random.sample(list(set(english_words)), randint(1, 50))
     return ' '.join(selected_words)
 
 def find_ips(message):
@@ -59,6 +60,10 @@ def get_response(user_input: str,user_name) -> str:
             return get_random_bible_verse()
         if 'talk to god' in lowered:
             return generate_string()
+        if '7' in lowered:
+             return '7'
+        if 'sapte' in lowered:
+             return 'sapte'
         else:
             ipchance = randint(1,1000)
             if ipchance > 995:
