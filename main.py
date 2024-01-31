@@ -5,6 +5,8 @@ from responses import get_response
 from reactions import get_reaction
 import sys
 import git 
+import asyncio
+
 dir_path = os.path.dirname(os.path.realpath(__file__))
 g = git.cmd.Git(dir_path)
 g.pull()
@@ -15,10 +17,12 @@ print (TOKEN)
 intents: Intents = Intents.default()
 intents.message_content = True  # NOQA
 client: Client = Client(intents=intents)
-
+message_to_edit=''
+need_to_edit=False
 
 # STEP 2: MESSAGE FUNCTIONALITY
 async def send_message(message: Message, user_message: str) -> None:
+    global message_to_edit,need_to_edit
     if not user_message:
         print('(Message was empty because intents were not enabled probably)')
         return
@@ -28,8 +32,11 @@ async def send_message(message: Message, user_message: str) -> None:
 
     try:
         response: str = get_response(user_message,str(message.author))
+        if '☃' in response:
+            response=response.replace("☃",'', 1)
+            need_to_edit=True 
         if response:
-            await message.author.send(response) if is_private else await message.channel.send(response)
+           message_to_edit = await message.author.send(response) if is_private else await message.channel.send(response)
     except Exception as e:
         print(e)
     
@@ -59,15 +66,23 @@ async def on_ready() -> None:
 # STEP 4: HANDLING INCOMING MESSAGES
 @client.event
 async def on_message(message: Message) -> None:
-    if message.author == client.user:
-        return
-
+    global message_to_edit,need_to_edit
     username: str = str(message.author)
     user_message: str = message.content
     channel: str = str(message.channel)
     print(f'[{channel}] {username}: "{user_message}"')
+    if message.author == client.user:
+        return    
+  
     await send_message(message, user_message)
-    await add_reaction(message, user_message)
+    await asyncio.sleep(1)
+    i=1
+    while need_to_edit:
+        await message_to_edit.edit(content=str(i)) # Edit it
+        i+=1
+        await asyncio.sleep(1)
+    await add_reaction(message, user_message) 
+          
 
 
 # STEP 5: MAIN ENTRY POINT

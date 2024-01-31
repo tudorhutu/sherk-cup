@@ -40,6 +40,7 @@ def add_line_to_file(file_path, line):
 adding_car = False
 car_to_add = ''
 
+
 def get_response(user_input: str,user_name) -> str:
         global adding_car, car_to_add
         lowered: str = user_input.lower()
@@ -60,12 +61,12 @@ def get_response(user_input: str,user_name) -> str:
             return get_random_bible_verse()
         if 'talk to god' in lowered:
             return generate_string()
-        if '7' in lowered:
-             return '7'
+        if '7' in lowered:             
+             return '☃7'
         if 'sapte' in lowered:
              return 'sapte'
         if 'pacanele' in lowered:
-             return ''.join(random.sample(list(emojilist), 3))
+             return ''.join([''.join(random.sample(list(emojilist), 1))+''.join(random.sample(list(emojilist), 1))+''.join(random.sample(list(emojilist), 1))])
         else:
             ipchance = randint(1,1000)
             if ipchance > 995:
