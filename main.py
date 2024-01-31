@@ -77,10 +77,10 @@ async def on_message(message: Message) -> None:
     await send_message(message, user_message)
     await asyncio.sleep(1)
     i=1
-    while need_to_edit:
-        await message_to_edit.edit(content=str(i)) # Edit it
-        i+=1
-        await asyncio.sleep(1)
+    if need_to_edit:
+        for i in range (1,10):
+            await message_to_edit.edit(content=str(i)) # Edit it            
+            await asyncio.sleep(1)
     await add_reaction(message, user_message) 
           
 
